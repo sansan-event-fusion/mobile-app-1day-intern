@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BizCard-OCR</string>
+
+    <!-- 共通 -->
+    <string name="card_crated_prefix">名刺登録日 %1$s</string>
+    <string name="register_button">登録</string>
+    <string name="element_title_person_name">氏名</string>
+    <string name="element_title_email">メールアドレス</string>
+    <string name="element_title_tel">電話番号</string>
+    <string name="element_title_company_name">会社名</string>
+
+    <!-- MainActivity -->
+    <string name="main_activity_camera_button_label">名刺をスキャン</string>
+    <string name="main_activity_item_ascending_order">名刺登録順 (昇順)</string>
+    <string name="main_activity_item_descending_order">名刺登録順 (降順)</string>
+    <string name="permission_camera_never_ask_again">カメラの使用を許可してください。</string>
+    <string name="permission_camera_denied">カメラの使用が許可されていません。</string>
+
+    <!-- ResultActivity -->
+    <string name="result_activity_title">名刺プレビュー</string>
+    <string name="result_activity_ocr_error">読み取りに\n失敗しました</string>
+    <string name="result_activity_ocr_in_progress">読み取り中</string>
+
+    <!-- DetailActivity -->
+    <string name="detail_activity_title">名刺情報</string>
+
+    <!-- EditActivity -->
+    <string name="edit_activity_title">名刺編集</string>
+</resources>
