@@ -1,2 +1,5 @@
 # mobile-app-1day-intern
-Mobile Application Groupの1Dayインターン用リポジトリ
+- モバイル1Dayインターン用のリポジトリです
+- iOSとAndroidでディレクトリを分けているため､それぞれのreadmeを参照ください
+- [iOS](./iOS/)
+- [Android](./Android/)

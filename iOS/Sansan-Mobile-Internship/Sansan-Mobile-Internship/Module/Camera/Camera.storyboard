@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Camera View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="CameraViewController" customModule="Sansan_Mobile_Internship" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f7p-81-fEf">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmT-z8-0jW">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRE-fH-Yl7">
+                                <rect key="frame" x="50" y="191.66666666666666" width="293" height="468.66666666666674"/>
+                                <color key="tintColor" red="0.93725490199999995" green="0.21176470589999999" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aRE-fH-Yl7" secondAttribute="height" multiplier="5:8" id="jVs-j9-NC8"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPy-Ci-LyC">
+                                <rect key="frame" x="161.66666666666666" y="732" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="DXy-qd-Ej6"/>
+                                    <constraint firstAttribute="height" constant="70" id="Ngr-Y2-Kqt"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="shutter_button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaN-hh-4iQ">
+                                <rect key="frame" x="24" y="75" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="C8O-iw-zd5"/>
+                                    <constraint firstAttribute="width" constant="24" id="Y7r-ad-wkh"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="close_navigation"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zpx-hV-OPa"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QmT-z8-0jW" secondAttribute="trailing" id="0Q7-H3-JpM"/>
+                            <constraint firstItem="GaN-hh-4iQ" firstAttribute="top" secondItem="f7p-81-fEf" secondAttribute="topMargin" constant="16" id="2mk-5G-1zY"/>
+                            <constraint firstAttribute="bottom" secondItem="QmT-z8-0jW" secondAttribute="bottom" id="43i-sb-cM0"/>
+                            <constraint firstItem="QmT-z8-0jW" firstAttribute="leading" secondItem="f7p-81-fEf" secondAttribute="leading" id="53y-sR-6Or"/>
+                            <constraint firstItem="Zpx-hV-OPa" firstAttribute="trailing" secondItem="aRE-fH-Yl7" secondAttribute="trailing" constant="50" id="ZJj-Ti-3KN"/>
+                            <constraint firstItem="aRE-fH-Yl7" firstAttribute="centerY" secondItem="f7p-81-fEf" secondAttribute="centerY" id="bWa-wo-2nz"/>
+                            <constraint firstItem="GaN-hh-4iQ" firstAttribute="leading" secondItem="f7p-81-fEf" secondAttribute="leading" constant="24" id="eHC-8e-5h6"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="dPy-Ci-LyC" secondAttribute="bottom" constant="16" id="iYk-Jr-pHr"/>
+                            <constraint firstItem="aRE-fH-Yl7" firstAttribute="centerX" secondItem="f7p-81-fEf" secondAttribute="centerX" id="jYg-eU-zIw"/>
+                            <constraint firstItem="dPy-Ci-LyC" firstAttribute="centerX" secondItem="f7p-81-fEf" secondAttribute="centerX" id="lAq-cd-L5X"/>
+                            <constraint firstItem="aRE-fH-Yl7" firstAttribute="leading" secondItem="Zpx-hV-OPa" secondAttribute="leading" constant="50" id="peH-2n-nAv"/>
+                            <constraint firstItem="QmT-z8-0jW" firstAttribute="top" secondItem="f7p-81-fEf" secondAttribute="top" id="wag-Ry-nrv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraPreview" destination="QmT-z8-0jW" id="fUT-X1-ew0"/>
+                        <outlet property="captureFrameView" destination="aRE-fH-Yl7" id="owz-xc-TPs"/>
+                        <outlet property="closeButton" destination="GaN-hh-4iQ" id="1xR-rm-GqY"/>
+                        <outlet property="shutterButton" destination="dPy-Ci-LyC" id="bCv-AX-Qh2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-153.43511450381678" y="4.9295774647887329"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="close_navigation" width="24" height="24"/>
+        <image name="shutter_button" width="71" height="71"/>
+    </resources>
+</document>
