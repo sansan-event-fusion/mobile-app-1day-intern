@@ -1,0 +1,33 @@
+# Uncomment the next line to define a global platform for your project
+minimum_deployment_target = 15.0
+platform :ios, minimum_deployment_target
+
+install! 'cocoapods', :warn_for_unused_master_specs_repo => false
+
+target 'Sansan-Mobile-Internship' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  inhibit_all_warnings!
+
+  # Pods for Sansan-Mobile-Internship
+  pod 'APIKit'
+  pod 'R.swift'
+  pod 'RxCocoa'
+  pod 'RxSwift'
+  pod 'RxGesture'
+  pod 'SVProgressHUD'
+
+  target 'Sansan-Mobile-InternshipTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = minimum_deployment_target
+      config.build_settings.delete 'ARCHS'
+    end
+  end
+end

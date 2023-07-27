@@ -1,0 +1,44 @@
+PODS:
+  - APIKit (5.4.0)
+  - R.swift (7.3.2)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxGesture (4.0.4):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - APIKit
+  - R.swift
+  - RxCocoa
+  - RxGesture
+  - RxSwift
+  - SVProgressHUD
+
+SPEC REPOS:
+  trunk:
+    - APIKit
+    - R.swift
+    - RxCocoa
+    - RxGesture
+    - RxRelay
+    - RxSwift
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  APIKit: 0680e86d2e8abd5bc42e64963f5f89d209eb9271
+  R.swift: 0af0d882f49f03711415cb4e5215daa977d8a480
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: 0e862f935d648f385b6439d6f717443b03c06d93
+
+COCOAPODS: 1.12.1

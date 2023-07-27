@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Sansan-Mobile-Internship
+
+  Created by Tomoki Hirayama on 2023/07/23.
+  Copyright © 2023 Sansan. All rights reserved.
+*/
+
+"scan_bizcard" = "名刺スキャン";
+"bizcard_preview" = "名刺プレビュー";
+"bizcard_edit" = "名刺編集";
+"bizcard_detail" = "名刺情報";
+"bizcard_registered_date" = "名刺登録日 %@";
+"person_name" = "氏名";
+"company_name" = "会社名";
+"tel_bumber" = "TEL";
+"email_address" = "メールアドレス";
+"registration" = "登録";
+"save" = "保存";
+"loading_message" = "読み込み中";
+"loading_fail_message" = "読み込みに失敗しました";
+"error_message" = "エラーです";
