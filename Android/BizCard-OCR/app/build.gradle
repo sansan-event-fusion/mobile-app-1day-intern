@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    defaultConfig {
+        applicationId "com.sansan.example.bizcardocr"
+        minSdkVersion 23
+        compileSdk 33
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'VISION_API_URL', "\"${visionApiUrl}\""
+        buildConfigField 'String', 'VISION_API_KEY', "\"${visionApiKey}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/main.kotlin_module']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
+
+    // Support Library
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation "androidx.activity:activity-ktx:1.7.2"
+
+    // Layout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Camera
+    def camera_version = '1.2.3'
+    implementation "androidx.camera:camera-core:$camera_version"
+    implementation "androidx.camera:camera-camera2:$camera_version"
+    implementation "androidx.camera:camera-lifecycle:$camera_version"
+    implementation "androidx.camera:camera-view:$camera_version"
+
+    // OKHttp
+    def okhttp_version = '4.11.0'
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    // Retrofit
+    def retrofit_version = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // JSON
+    implementation "com.google.code.gson:gson:2.10.1"
+
+    // Unit Test
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.jetbrains.kotlin:kotlin-test:1.8.21"
+}
+
+ext.applicationInfo = [
+        name           : "Biz Card OCR Application",
+        copyrightHolder: "[Your Name]",
+        year           : "2018",
+        url            : "[Your Address]"
+]
