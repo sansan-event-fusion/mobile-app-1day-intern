@@ -53,7 +53,7 @@
 **MVVMをベースにClean Architectureを参考にしたものになっています**
 - [MVVM+CreanArchtecture](https://github.com/kudoleh/iOS-Clean-Architecture-MVVM)
 
-<img src="./ReadmeAssets/mvvmr.png" width="800px">
+<img src="./assets/mvvmr.png" width="800px">
 
 ### Router
 - Moduleの初期化を行い､ViewModelに依存物を渡す
