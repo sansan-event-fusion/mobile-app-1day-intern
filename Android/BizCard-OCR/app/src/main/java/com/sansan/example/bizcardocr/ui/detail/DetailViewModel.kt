@@ -1,57 +1,59 @@
 package com.sansan.example.bizcardocr.ui.detail
 
+import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.sansan.example.bizcardocr.data.repository.BizCardRepository
-import com.sansan.example.bizcardocr.utility.createBitmapFromJpeg
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.sansan.example.bizcardocr.AppContainer
+import com.sansan.example.bizcardocr.domain.repository.BizCardRepository
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-class DetailViewModel(private val bizCardId: Long) : ViewModel() {
+class DetailViewModel(
+    private val bizCardId: Long,
+    private val bizCardRepository: BizCardRepository
+) : ViewModel() {
 
-    private val bizCardRepository = BizCardRepository
-
-    private val _viewState: MutableStateFlow<DetailViewState> = MutableStateFlow(
-        DetailViewState(
-            null,
-            "----/--/--",
-            "-",
-            "-",
-            "-",
-            "-"
+    private val bizCardState = bizCardRepository
+        .getBizCardStream(bizCardId)
+        .map {
+            DetailViewState(
+                cardImage = BitmapFactory.decodeFile(it.cardImagePath),
+                createdDateText = SimpleDateFormat.getDateInstance(DateFormat.DATE_FIELD)
+                    .format(it.createdDate),
+                name = it.name,
+                company = it.company,
+                tel = it.tel,
+                email = it.email
+            )
+        }
+        .stateIn(
+            viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = DetailViewState(
+                null,
+                "----/--/--",
+                "-",
+                "-",
+                "-",
+                "-"
+            )
         )
-    )
 
-    val viewState: StateFlow<DetailViewState> = _viewState.asStateFlow()
+    val viewState: StateFlow<DetailViewState> = bizCardState
 
-    init {
-        bizCardRepository
-            .getBizCardStream(bizCardId)
-            .onEach {
-                _viewState.value = DetailViewState(
-                    cardImage = it.cardImage.createBitmapFromJpeg(),
-                    createdDateText = SimpleDateFormat.getDateInstance(DateFormat.DATE_FIELD)
-                        .format(it.createdDate),
-                    name = it.name,
-                    company = it.company,
-                    tel = it.tel,
-                    email = it.email
-                )
-            }
-            .launchIn(viewModelScope)
-    }
-
-    class DetailViewModelFactory(private val bizCardId: Long) : ViewModelProvider.Factory {
+    class DetailViewModelFactory(
+        private val bizCardId: Long,
+        private val appContainer: AppContainer
+    ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-                return DetailViewModel(bizCardId) as T
+                return DetailViewModel(bizCardId, appContainer.bizCardRepository) as T
             }
             throw IllegalArgumentException("Unknown ViewModel")
         }

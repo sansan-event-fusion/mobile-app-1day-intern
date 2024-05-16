@@ -1,0 +1,59 @@
+{
+  "pins" : [
+    {
+      "identity" : "r.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mac-cain13/R.swift",
+      "state" : {
+        "revision" : "384eab88d1a0b98ac96f4819e50a4308ecd5359f",
+        "version" : "7.5.0"
+      }
+    },
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core.git",
+      "state" : {
+        "revision" : "31bcd833c8f67b02f319bede83a05c65868258a9",
+        "version" : "13.24.1"
+      }
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "revision" : "2300f05167898acb20a7f7c1199e8a1cf97d6039",
+        "version" : "10.45.0"
+      }
+    },
+    {
+      "identity" : "svprogresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SVProgressHUD/SVProgressHUD.git",
+      "state" : {
+        "revision" : "c33f7c775ba7feea6047a1fc3257f2e5863b44f7",
+        "version" : "2.3.1"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "46989693916f56d1186bd59ac15124caef896560",
+        "version" : "1.3.1"
+      }
+    },
+    {
+      "identity" : "xcodeedit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomlokhorst/XcodeEdit",
+      "state" : {
+        "revision" : "b6b67389a0f1a6fdd9c6457a8ab5b02eaab13c5c",
+        "version" : "2.9.2"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -4,27 +4,35 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Size
+import android.util.Log
 import android.view.Surface.ROTATION_0
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.activity.viewModels
+import androidx.annotation.OptIn
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
+import androidx.camera.core.ExperimentalGetImage
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
+import androidx.camera.core.UseCaseGroup
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.sansan.example.bizcardocr.databinding.ActivityCameraBinding
+import com.sansan.bizcardocr.app.databinding.ActivityCameraBinding
 import com.sansan.example.bizcardocr.ui.result.ResultActivity
 import kotlinx.coroutines.launch
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
 
@@ -35,6 +43,9 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        // TODO: 矩形認識の領域描画の処理を書きましょう
+
         initCamera()
         initViews()
 
@@ -44,8 +55,11 @@ class CameraActivity : AppCompatActivity() {
                     .transactionEvent
                     .collect {
                         when (it) {
-                            CameraViewEvent.TRANSITION_TO_RESULT -> {
-                                val intent = ResultActivity.createIntent(this@CameraActivity)
+                            is CameraViewEvent.TransitionToResult -> {
+                                val intent = ResultActivity.createIntent(
+                                    this@CameraActivity,
+                                    it.cardImagePath
+                                )
                                 startActivity(intent)
                             }
                         }
@@ -57,6 +71,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         setFullScreen()
+        binding.shutterButton.isEnabled = true
     }
 
     private fun initViews() {
@@ -69,32 +84,56 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun initCamera() {
+        val cameraExecutor: ExecutorService = Executors.newSingleThreadExecutor()
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
-            val preview: Preview = Preview
-                .Builder()
-                .setTargetResolution(Size(1280, 720))
-                .build()
-            val imageCapture = ImageCapture
-                .Builder()
-                .setTargetResolution(Size(1280, 720))
+            val preview: Preview = Preview.Builder().build()
+            val imageCapture = ImageCapture.Builder()
                 .setTargetRotation(ROTATION_0)
                 .build()
                 .also { this.imageCapture = it }
 
-            binding.previewView.scaleType = PreviewView.ScaleType.FIT_CENTER
+            val imageAnalysis = ImageAnalysis.Builder().build().apply {
+                setAnalyzer(cameraExecutor, CardAnalyzer())
+            }
+
             preview.setSurfaceProvider(binding.previewView.surfaceProvider)
 
             cameraProvider.unbindAll()
+            val useCaseGroup = binding.previewView.viewPort?.let { viewPort ->
+                UseCaseGroup
+                    .Builder()
+                    .addUseCase(preview)
+                    .addUseCase(imageCapture)
+                    .addUseCase(imageAnalysis)
+                    .setViewPort(viewPort)
+                    .build()
+            } ?: throw IllegalStateException("ViewPort could not be found.")
+
             cameraProvider.bindToLifecycle(
                 this,
                 CameraSelector.DEFAULT_BACK_CAMERA,
-                imageCapture,
-                preview
+                useCaseGroup
             )
             binding.shutterButton.isEnabled = true
         }, ContextCompat.getMainExecutor(this))
+    }
+
+    /**
+     *  TODO:
+     *  矩形認識に必要なクラスです
+     *  必要な引数を追加してください
+     *  */
+    class CardAnalyzer :
+        ImageAnalysis.Analyzer {
+        @OptIn(ExperimentalGetImage::class)
+        override fun analyze(imageProxy: ImageProxy) {
+            val mediaImage = imageProxy.image
+            if (mediaImage != null) {
+                // TODO : 矩形認識処理
+            }
+        }
     }
 
     private fun setFullScreen() {
@@ -114,27 +153,37 @@ class CameraActivity : AppCompatActivity() {
 
     private fun takePicture() {
         binding.shutterButton.isEnabled = false
+        val outPutFileName = SimpleDateFormat(
+            "yyyyMMddHHmmssSSS",
+            Locale.JAPAN
+        ).format(System.currentTimeMillis())
+        val outputDir = getDir("card_images", Context.MODE_PRIVATE).apply {
+            setWritable(true)
+        }
+        val outPutOption = ImageCapture.OutputFileOptions.Builder(
+            File(outputDir, "$outPutFileName.jpg")
+        ).build()
+
+        // TODO: 矩形認識の発展になりますが、矩形切り取りにも挑戦してみましょう
         imageCapture?.takePicture(
+            outPutOption,
             ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageCapturedCallback() {
-                override fun onError(error: ImageCaptureException) {
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exc: ImageCaptureException) {
+                    Log.e("CameraActivity", exc.toString())
                     binding.shutterButton.isEnabled = true
                 }
 
-                override fun onCaptureSuccess(image: ImageProxy) {
-                    viewModel.onTakePictureSuccess(convertImageProxyToByteArray(image))
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    output.savedUri?.let {
+                        viewModel.takePictureSuccess(it)
+                    } ?: run {
+                        Log.e("CameraActivity", "ImageCapture.OutputFileResults.savedUri is null")
+                        binding.shutterButton.isEnabled = true
+                    }
                 }
-            })
-    }
-
-    private fun convertImageProxyToByteArray(imageProxy: ImageProxy): ByteArray {
-        imageProxy.use {
-            val buffer = imageProxy.planes[0].buffer
-            buffer.rewind()
-            val data = ByteArray(buffer.remaining())
-            buffer.get(data)
-            return data
-        }
+            }
+        )
     }
 
     companion object {

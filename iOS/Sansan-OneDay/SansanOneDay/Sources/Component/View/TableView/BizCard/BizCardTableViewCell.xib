@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BizCardTableViewCell" rowHeight="0.0" id="KGk-i7-Jjw" customClass="BizCardTableViewCell" customModule="SansanOneDay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wxv-1C-YAY">
+                        <rect key="frame" x="20" y="11" width="335" height="70"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bRG-0t-YaG">
+                                <rect key="frame" x="0.0" y="10.000000000000004" width="98.333333333333329" height="50.333333333333343"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="田中 徳兵衛" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eP1-4o-QM4">
+                                        <rect key="frame" x="0.0" y="0.0" width="98.333333333333329" height="21.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" name="Black/Panther"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浅葉建設株式会社" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ooo-nP-G3r">
+                                        <rect key="frame" x="0.0" y="21.666666666666664" width="98.333333333333329" height="14.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" name="Gray/MainElephant"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="営業本部本部長" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVI-DY-PTE">
+                                        <rect key="frame" x="0.0" y="36" width="98.333333333333329" height="14.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" name="Gray/MainElephant"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YS9-kJ-fSx">
+                                <rect key="frame" x="247" y="7.6666666666666714" width="88" height="55"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZMf-AI-dA3">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="3hI-1C-n77"/>
+                                            <constraint firstAttribute="width" constant="88" id="oXn-Ja-yLJ"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="wxv-1C-YAY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="3dI-yA-4h8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="wxv-1C-YAY" secondAttribute="trailing" id="GXr-sY-ufE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="wxv-1C-YAY" secondAttribute="bottom" id="KQm-Qv-w2F"/>
+                    <constraint firstItem="wxv-1C-YAY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="cLh-oq-2S3"/>
+                </constraints>
+                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="16" bottom="8" trailing="16"/>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="bizCardImageView" destination="ZMf-AI-dA3" id="N92-Nc-Ojp"/>
+                <outlet property="companyNameLabel" destination="ooo-nP-G3r" id="sDr-Dd-LJb"/>
+                <outlet property="nameLabel" destination="eP1-4o-QM4" id="613-7c-Vj1"/>
+                <outlet property="titleNameLabel" destination="IVI-DY-PTE" id="PpM-mr-WzB"/>
+            </connections>
+            <point key="canvasLocation" x="315.26717557251908" y="77.464788732394368"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="Black/Panther">
+            <color red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray/MainElephant">
+            <color red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

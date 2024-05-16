@@ -1,5 +1,5 @@
 package com.sansan.example.bizcardocr.ui.camera
 
-enum class CameraViewEvent {
-    TRANSITION_TO_RESULT
+sealed interface CameraViewEvent {
+    data class TransitionToResult(val cardImagePath: String) : CameraViewEvent
 }

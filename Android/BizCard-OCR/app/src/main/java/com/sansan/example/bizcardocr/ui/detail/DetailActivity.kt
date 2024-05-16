@@ -3,13 +3,16 @@ package com.sansan.example.bizcardocr.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.sansan.example.bizcardocr.R
-import com.sansan.example.bizcardocr.databinding.ActivityDetailBinding
+import com.sansan.bizcardocr.app.R
+import com.sansan.bizcardocr.app.databinding.ActivityDetailBinding
+import com.sansan.example.bizcardocr.BizCardOCRApplication
 import com.sansan.example.bizcardocr.ui.edit.EditActivity
 import kotlinx.coroutines.launch
 
@@ -18,9 +21,10 @@ class DetailActivity : AppCompatActivity() {
     private val binding by lazy { ActivityDetailBinding.inflate(layoutInflater) }
 
     private val viewModel: DetailViewModel by viewModels {
+        val bizCardOCRApplication = application as BizCardOCRApplication
         val bizCardId = this.intent.getLongExtra(EXTRA_KEY_BIZ_CARD_ID, -1)
         if (bizCardId == -1L) throw IllegalArgumentException()
-        DetailViewModel.DetailViewModelFactory(bizCardId)
+        DetailViewModel.DetailViewModelFactory(bizCardId, bizCardOCRApplication.container)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +42,14 @@ class DetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.viewState.collect {
-                    binding.bizCardImage.setImageBitmap(it.cardImage)
-                    binding.createdDate.text =
+                    binding.included.bizCardImage.setImageBitmap(it.cardImage)
+                    binding.included.ocrStateDescription.text =
                         getString(R.string.card_crated_prefix, it.createdDateText)
-                    binding.nameValueEditText.text = it.name
-                    binding.companyNameValueEditText.text = it.company
-                    binding.telValueEditText.text = it.tel
-                    binding.mailValueEditText.text = it.email
+                    binding.included.nameValueEditText.setViewOnly(it.name)
+                    binding.included.companyNameValueEditText.setViewOnly(it.company)
+                    binding.included.telValueEditText.setViewOnly(it.tel)
+                    binding.included.mailValueEditText.setViewOnly(it.email)
+                    binding.included.registerButton.visibility = View.INVISIBLE
                 }
             }
         }
@@ -58,6 +63,12 @@ class DetailActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
+    }
+
+    private fun EditText.setViewOnly(text: String) {
+        setText(text)
+        isFocusable = false
+        isEnabled = false
     }
 
     companion object {

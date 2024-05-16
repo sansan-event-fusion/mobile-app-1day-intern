@@ -1,0 +1,11 @@
+//
+//  Secret.xcconfig
+//  SansanOneDay
+//
+//  Created by Tomoki Hirayama on 2024/05/02.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+GOOGLE_API_KEY = AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

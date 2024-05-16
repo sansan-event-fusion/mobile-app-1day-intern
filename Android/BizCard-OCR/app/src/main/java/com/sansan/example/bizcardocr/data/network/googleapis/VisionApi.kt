@@ -1,6 +1,6 @@
 package com.sansan.example.bizcardocr.data.network.googleapis
 
-import com.sansan.example.bizcardocr.BuildConfig
+import com.sansan.bizcardocr.app.BuildConfig
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Query
