@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BizCardDetailViewController" customModule="SansanOneDay" customModuleProvider="target">
+            <connections>
+                <outlet property="bizCardImageView" destination="lEi-CF-UH6" id="ib8-tO-iFl"/>
+                <outlet property="bizCardRegistedDateLabel" destination="ucr-zX-GlI" id="GIj-sA-CGd"/>
+                <outlet property="companyLabel" destination="YGl-jV-Vze" id="V78-eS-vEY"/>
+                <outlet property="emailLabel" destination="bU5-fl-Exx" id="2ow-go-buV"/>
+                <outlet property="nameLabel" destination="Aeg-jv-WC0" id="LfM-1X-5Rn"/>
+                <outlet property="telLabel" destination="0hl-Hk-v25" id="nnD-lc-arS"/>
+                <outlet property="view" destination="D1x-Xm-rN5" id="ayF-x5-0oQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="D1x-Xm-rN5">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="DPH-me-hQV">
+                    <rect key="frame" x="0.0" y="59" width="393" height="256"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lEi-CF-UH6">
+                            <rect key="frame" x="70" y="16" width="253" height="158"/>
+                            <color key="backgroundColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="lEi-CF-UH6" secondAttribute="height" multiplier="8:5" id="Hjj-C6-LQh"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucr-zX-GlI">
+                            <rect key="frame" x="171.66666666666666" y="190" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26" id="85d-A2-BmX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" name="Gray/MainRhino"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="lEi-CF-UH6" firstAttribute="leading" secondItem="DPH-me-hQV" secondAttribute="leading" constant="70" id="PqC-N7-8EE"/>
+                        <constraint firstAttribute="trailing" secondItem="lEi-CF-UH6" secondAttribute="trailing" constant="70" id="qH1-t4-kQr"/>
+                    </constraints>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="16" bottom="16" trailing="16"/>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7fq-e8-2hQ">
+                    <rect key="frame" x="0.0" y="315" width="393" height="239"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aeg-jv-WC0" customClass="EditableLabel" customModule="SansanOneDay" customModuleProvider="target">
+                            <rect key="frame" x="16" y="0.0" width="361" height="54"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGl-jV-Vze" customClass="EditableLabel" customModule="SansanOneDay" customModuleProvider="target">
+                            <rect key="frame" x="16" y="62" width="361" height="53.666666666666657"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hl-Hk-v25" customClass="EditableLabel" customModule="SansanOneDay" customModuleProvider="target">
+                            <rect key="frame" x="16" y="123.6666666666667" width="361" height="53.666666666666671"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bU5-fl-Exx" customClass="EditableLabel" customModule="SansanOneDay" customModuleProvider="target">
+                            <rect key="frame" x="16" y="185.33333333333331" width="361" height="53.666666666666657"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="7fq-e8-2hQ" secondAttribute="height" multiplier="393:239" id="I6D-bC-yNk"/>
+                    </constraints>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="16" bottom="0.0" trailing="16"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="nRi-sf-XNT"/>
+            <keyboardLayoutGuide key="keyboard" followsUndockedKeyboard="YES" id="WuW-40-4TD"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="7fq-e8-2hQ" firstAttribute="leading" secondItem="nRi-sf-XNT" secondAttribute="leading" id="57f-xk-32I"/>
+                <constraint firstItem="DPH-me-hQV" firstAttribute="top" secondItem="nRi-sf-XNT" secondAttribute="top" priority="990" id="6YV-vd-MBI"/>
+                <constraint firstItem="DPH-me-hQV" firstAttribute="top" relation="lessThanOrEqual" secondItem="nRi-sf-XNT" secondAttribute="top" id="93n-NB-UKu"/>
+                <constraint firstItem="DPH-me-hQV" firstAttribute="leading" secondItem="nRi-sf-XNT" secondAttribute="leading" id="SFM-YR-qm4"/>
+                <constraint firstItem="WuW-40-4TD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7fq-e8-2hQ" secondAttribute="bottom" id="T2w-v0-2hu"/>
+                <constraint firstItem="7fq-e8-2hQ" firstAttribute="trailing" secondItem="nRi-sf-XNT" secondAttribute="trailing" id="b4e-jd-WYu"/>
+                <constraint firstItem="DPH-me-hQV" firstAttribute="trailing" secondItem="nRi-sf-XNT" secondAttribute="trailing" id="wpJ-OM-q9M"/>
+                <constraint firstItem="7fq-e8-2hQ" firstAttribute="top" secondItem="DPH-me-hQV" secondAttribute="bottom" id="wtj-HR-awp"/>
+            </constraints>
+            <point key="canvasLocation" x="-25" y="-626"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Gray/MainRhino">
+            <color red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -10,7 +10,7 @@
     <string name="element_title_company_name">会社名</string>
 
     <!-- MainActivity -->
-    <string name="main_activity_camera_button_label">名刺をスキャン</string>
+    <string name="main_activity_camera_button_label">名刺スキャン</string>
     <string name="main_activity_item_ascending_order">名刺登録順 (昇順)</string>
     <string name="main_activity_item_descending_order">名刺登録順 (降順)</string>
     <string name="permission_camera_never_ask_again">カメラの使用を許可してください。</string>
@@ -26,4 +26,10 @@
 
     <!-- EditActivity -->
     <string name="edit_activity_title">名刺編集</string>
+
+    <!-- Appbar -->
+    <string name="appbar_search_hint">氏名・会社名・Email・TEL</string>
+    <string name="appbar_option_asc">昇順</string>
+    <string name="appbar_option_desc">降順</string>
+
 </resources>

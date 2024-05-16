@@ -1,6 +1,6 @@
 package com.sansan.example.bizcardocr.data.network
 
-import com.sansan.example.bizcardocr.BuildConfig
+import com.sansan.bizcardocr.app.BuildConfig
 import com.sansan.example.bizcardocr.data.network.googleapis.VisionApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

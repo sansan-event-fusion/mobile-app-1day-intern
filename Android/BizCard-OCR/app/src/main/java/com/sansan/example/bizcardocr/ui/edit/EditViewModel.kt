@@ -1,67 +1,73 @@
 package com.sansan.example.bizcardocr.ui.edit
 
+import android.graphics.BitmapFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.sansan.example.bizcardocr.data.repository.BizCardRepository
+import com.sansan.example.bizcardocr.AppContainer
 import com.sansan.example.bizcardocr.domain.model.BizCard
-import com.sansan.example.bizcardocr.utility.createBitmapFromJpeg
+import com.sansan.example.bizcardocr.domain.repository.BizCardRepository
+import com.sansan.example.bizcardocr.ui.CardFormState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-class EditViewModel(private val bizCardId: Long) : ViewModel() {
+class EditViewModel(
+    private val bizCardId: Long,
+    private val bizCardRepository: BizCardRepository
+) : ViewModel() {
 
-    private val bizCardRepository = BizCardRepository
+    private val cardFormState = MutableStateFlow(CardFormState("", "", "", ""))
+    private val bizCardState = bizCardRepository.getBizCardStream(bizCardId)
 
-    private val _viewState: MutableStateFlow<EditViewState> = MutableStateFlow(
+    init {
+        viewModelScope.launch {
+            cardFormState.value = bizCardState.map {
+                CardFormState(it.name, it.company, it.email, it.tel)
+            }.first()
+        }
+    }
+
+    val viewState: StateFlow<EditViewState> = combine(
+        bizCardState,
+        cardFormState,
+    ) { bizCard, cardForm ->
         EditViewState(
+            cardImage = bizCard.cardImagePath.let { BitmapFactory.decodeFile(it) },
+            createdDateText = SimpleDateFormat.getDateInstance(DateFormat.DATE_FIELD)
+                .format(bizCard.createdDate),
+            cardForm = cardForm
+        )
+    }.stateIn(
+        viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = EditViewState(
             cardImage = null,
             createdDateText = "----/--/--",
-            name = "-",
-            company = "-",
-            email = "-",
-            tel = "-"
+            cardForm = CardFormState("", "", "", "")
         )
     )
-
-    val viewState = _viewState.asStateFlow()
 
     private val _viewEvent: MutableSharedFlow<EditViewEvent> = MutableSharedFlow()
     val viewEvent: SharedFlow<EditViewEvent> = _viewEvent.asSharedFlow()
 
-    init {
-        bizCardRepository
-            .getBizCardStream(bizCardId)
-            .onEach {
-                _viewState.value = EditViewState(
-                    cardImage = it.cardImage.createBitmapFromJpeg(),
-                    createdDateText = SimpleDateFormat.getDateInstance(DateFormat.DATE_FIELD)
-                        .format(it.createdDate),
-                    name = it.name,
-                    company = it.company,
-                    tel = it.tel,
-                    email = it.email
-                )
-            }
-            .launchIn(viewModelScope)
-    }
-
     fun onRegisterButtonPressed(name: String, email: String, tel: String, company: String) {
         viewModelScope.launch {
-            val oldBizCard = bizCardRepository.getBizCardStream(bizCardId).first()
+            val bizCard = bizCardState.first()
             val newBizCard = BizCard(
-                bizCardId = bizCardId,
-                cardImage = oldBizCard.cardImage,
-                createdDate = oldBizCard.createdDate,
+                bizCardId = bizCard.bizCardId,
+                cardImagePath = bizCard.cardImagePath,
+                createdDate = bizCard.createdDate,
                 name = name,
                 company = company,
                 email = email,
@@ -72,11 +78,14 @@ class EditViewModel(private val bizCardId: Long) : ViewModel() {
         }
     }
 
-    class EditViewModelFactory(private val bizCardId: Long) : ViewModelProvider.Factory {
+    class EditViewModelFactory(
+        private val bizCardId: Long,
+        private val appContainer: AppContainer
+    ) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(EditViewModel::class.java)) {
-                return EditViewModel(bizCardId) as T
+                return EditViewModel(bizCardId, appContainer.bizCardRepository) as T
             }
             throw IllegalArgumentException("Unknown ViewModel")
         }

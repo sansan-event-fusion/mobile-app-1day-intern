@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.camera.CameraActivity">
+    tools:context="com.sansan.example.bizcardocr.ui.camera.CameraActivity">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
@@ -36,5 +36,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- TODO: 矩形切り取りエリアの描画用のViewを定義しましょう -->
 
 </FrameLayout>

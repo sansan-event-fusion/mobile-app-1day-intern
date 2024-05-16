@@ -10,17 +10,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.sansan.example.bizcardocr.R
-import com.sansan.example.bizcardocr.databinding.ActivityResultBinding
+import com.sansan.bizcardocr.app.R
+import com.sansan.bizcardocr.app.databinding.ActivityResultBinding
+import com.sansan.example.bizcardocr.BizCardOCRApplication
 import com.sansan.example.bizcardocr.ui.main.MainActivity
 import kotlinx.coroutines.launch
 
 class ResultActivity : AppCompatActivity() {
 
-    private val viewModel: ResultViewModel by viewModels()
-
+    private val viewModel: ResultViewModel by viewModels {
+        val bizCardApplication = application as BizCardOCRApplication
+        ResultViewModel.ResultViewModelFactory(
+            bizCardApplication.container,
+            intent.getStringExtra(EXTRA_KEY_TARGET_FILE_PATH)!!
+        )
+    }
     private val binding by lazy { ActivityResultBinding.inflate(layoutInflater) }
 
+    // TODO: Jetpack Composeを使ったUI実装に変更してみましょう！
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -31,11 +38,13 @@ class ResultActivity : AppCompatActivity() {
         }
 
         binding.included.registerButton.setOnClickListener {
+            // NOTE :
+            // 現時点ではStateとEditTextが同期されていないので、EditTextの入力状態をViewModelに反映させる
             viewModel.onRegisterButtonPressed(
-                name = binding.included.nameValueEditText.text.toString(),
-                company = binding.included.companyNameValueEditText.text.toString(),
-                email = binding.included.mailValueEditText.text.toString(),
-                tel = binding.included.telValueEditText.text.toString()
+                binding.included.nameValueEditText.text.toString(),
+                binding.included.companyNameValueEditText.text.toString(),
+                binding.included.mailValueEditText.text.toString(),
+                binding.included.telValueEditText.text.toString()
             )
         }
 
@@ -60,38 +69,54 @@ class ResultActivity : AppCompatActivity() {
                 launch {
                     viewModel.viewState.collect {
                         binding.included.bizCardImage.setImageBitmap(it.capturedCardImage)
-                        when (it) {
-                            is ResultViewState.InProgress -> {
-                                binding.ocrResultArea.visibility = View.VISIBLE
-                                binding.groupOcrInprogress.visibility = View.VISIBLE
-                                binding.groupOcrError.visibility = View.INVISIBLE
-                                binding.included.registerButton.isEnabled = false
-                                binding.setTextEditable(false)
-                            }
-
-                            is ResultViewState.Success -> {
+                        when (it.progress) {
+                            OCRProgress.INIT -> {
                                 binding.ocrResultArea.visibility = View.GONE
                                 binding.groupOcrInprogress.visibility = View.INVISIBLE
                                 binding.groupOcrError.visibility = View.INVISIBLE
-                                binding.included.ocrStateDescription.text =
-                                    getString(R.string.card_crated_prefix, it.createdDateText)
-                                binding.included.nameValueEditText.setText(it.name)
-                                binding.included.mailValueEditText.setText(it.email)
-                                binding.included.telValueEditText.setText(it.tel)
-                                binding.setTextEditable(true)
-                                binding.included.companyNameValueEditText.setText(it.company)
-                                binding.included.registerButton.isEnabled = true
+                                binding.setTextEditable(false)
                             }
 
-                            is ResultViewState.Error -> {
+                            OCRProgress.IN_PROGRESS -> {
+                                binding.ocrResultArea.visibility = View.VISIBLE
+                                binding.groupOcrInprogress.visibility = View.VISIBLE
+                                binding.groupOcrError.visibility = View.INVISIBLE
+                                binding.setTextEditable(false)
+                            }
+
+                            OCRProgress.SUCCESS -> {
+                                binding.ocrResultArea.visibility = View.GONE
+                                binding.groupOcrInprogress.visibility = View.INVISIBLE
+                                binding.groupOcrError.visibility = View.INVISIBLE
+                                binding.setTextEditable(true)
+                            }
+
+                            OCRProgress.ERROR -> {
                                 binding.ocrResultArea.visibility = View.VISIBLE
                                 binding.groupOcrInprogress.visibility = View.INVISIBLE
                                 binding.groupOcrError.visibility = View.VISIBLE
-                                binding.included.registerButton.isEnabled = false
                                 binding.setTextEditable(false)
                             }
                         }
-
+                        when (it.isButtonEnabled) {
+                            true -> binding.included.registerButton.isEnabled = true
+                            false -> binding.included.registerButton.isEnabled = false
+                        }
+                        it.capturedCardImage?.let { bitmap ->
+                            binding.included.bizCardImage.setImageBitmap(bitmap)
+                        }
+                        it.createdDateText.let { text ->
+                            binding.included.ocrStateDescription.text =
+                                getString(R.string.card_crated_prefix, text)
+                        }
+                        // NOTE: Compose化を意識したState構成なのでEditTextで使うには向いていません
+                        // 現時点ではEditTextでの変更がStateに反映されないので、StateとEditTextの不一致が起こります
+                        it.cardForm.let { cardForm ->
+                            binding.included.nameValueEditText.setText(cardForm.name)
+                            binding.included.companyNameValueEditText.setText(cardForm.company)
+                            binding.included.mailValueEditText.setText(cardForm.email)
+                            binding.included.telValueEditText.setText(cardForm.tel)
+                        }
                     }
                 }
             }
@@ -123,7 +148,10 @@ class ResultActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun createIntent(context: Context): Intent =
-            Intent(context, ResultActivity::class.java)
+        const val EXTRA_KEY_TARGET_FILE_PATH = "EXTRA_KEY_TARGET_FILE_PATH"
+        fun createIntent(context: Context, filePath: String): Intent =
+            Intent(context, ResultActivity::class.java).apply {
+                putExtra(EXTRA_KEY_TARGET_FILE_PATH, filePath)
+            }
     }
 }
