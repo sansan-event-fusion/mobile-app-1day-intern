@@ -37,7 +37,10 @@ Sansanのモバイル1DayインターンのiOSプロジェクトです。
 2. miseでTuist環境をセットアップする
     1. プロジェクトの `Sansan-OneDay` 配下、`.mise.toml` があるディレクトリに移動する
     2. `mise install` を実行する. `.mise.toml` に記述された依存ライブラリが環境としてインストールされる
-3. Tuistでプロジェクトを生成する
+3. Configを準備する
+    1. `SansanOneDay/Resources` 配下に `Config.xcconfig.template` というファイルがあるので、そのファイル名を変更し `Config.xcconfig` にリネームしてください
+    2. `GOOGLE_API_KEY` は当日に発行します
+4. Tuistでプロジェクトを生成する
     - https://github.com/tuist/tuist
     - https://docs.tuist.io/
     - TuistはSwiftでプロジェクト構成を記述し、ワークスペース、プロジェクト、`info.plist` からビルド設定までを構築することができる。
