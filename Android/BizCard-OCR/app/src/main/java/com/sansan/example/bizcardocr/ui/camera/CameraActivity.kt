@@ -49,6 +49,7 @@ class CameraActivity : AppCompatActivity() {
         initCamera()
         initViews()
 
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel
@@ -80,6 +81,12 @@ class CameraActivity : AppCompatActivity() {
         }
         binding.cancelButton.setOnClickListener {
             finish()
+        }
+        binding.pickFromGallery.setOnClickListener {
+            // TODO: アルバムから名刺画像を取得する処理を作りましょう
+        }
+        binding.detectionSwitch.setOnClickListener {
+
         }
     }
 
