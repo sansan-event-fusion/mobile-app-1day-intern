@@ -6,6 +6,4 @@ sealed interface MainViewEvent {
     ) : MainViewEvent
 
     object TransitionToCamera : MainViewEvent
-
-    object TransitionToGallery : MainViewEvent
 }

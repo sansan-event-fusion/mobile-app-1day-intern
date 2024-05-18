@@ -16,6 +16,9 @@
     <string name="permission_camera_never_ask_again">カメラの使用を許可してください。</string>
     <string name="permission_camera_denied">カメラの使用が許可されていません。</string>
 
+    <!-- CameraActivity -->
+    <string name="camera_activity_detection_switch">自動検出</string>
+
     <!-- ResultActivity -->
     <string name="result_activity_title">名刺プレビュー</string>
     <string name="result_activity_ocr_error">読み取りに\n失敗しました</string>

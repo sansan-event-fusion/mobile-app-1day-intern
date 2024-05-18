@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity() {
                         is MainViewEvent.TransitionToCamera -> {
                             requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
                         }
-
-                        is MainViewEvent.TransitionToGallery -> {
-                            // TODO: アルバムから名刺画像を取得する処理を作りましょう
-                        }
                     }
                 }
             }
