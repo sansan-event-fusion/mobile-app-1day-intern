@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sansan.bizcardocr.app.R
@@ -50,7 +49,6 @@ fun MainAppBar(
                 onMenuItemClick = { item -> onMenuItemClick(item) }
             )
         }
-
         is AppBarState.Search -> {
             SearchAppBar(
                 query = appBarState.query,
@@ -95,8 +93,9 @@ fun SearchAppBar(
                     ) {
                         innerTextField()
                         if (query.isEmpty()) {
+                            // TODO: リソース化
                             Text(
-                                text = stringResource(id = R.string.appbar_search_hint),
+                                text = "氏名・会社名・Email・TEL",
                                 style = BizCardTypography.Body1
                             )
                         }
@@ -144,10 +143,10 @@ fun DefaultAppBar(
                     expanded = menuExpanded,
                     onDismissRequest = { onDismissOptionMenu() }) {
                     DropdownMenuItem(onClick = { onMenuItemClick(MainAppBarMenu.SORT_BY_DATE_ASC) }) {
-                        Text(stringResource(id = R.string.appbar_option_asc))
+                        Text("昇順")
                     }
-                    DropdownMenuItem(onClick = { onMenuItemClick(MainAppBarMenu.SORT_BY_DATE_DESC) }) {
-                        Text(stringResource(id = R.string.appbar_option_desc))
+                    DropdownMenuItem(onClick = { onMenuItemClick(MainAppBarMenu.SORT_BY_DATE_ASC) }) {
+                        Text("降順")
                     }
                 }
             }

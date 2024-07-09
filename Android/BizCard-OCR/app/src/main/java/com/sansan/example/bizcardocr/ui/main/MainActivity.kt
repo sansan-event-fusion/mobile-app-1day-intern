@@ -34,10 +34,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-    // TODO : アルバムから名刺画像を取得する処理を作りましょう
-    // private val getLocalImageLauncher: ActivityResultLauncher<String> =
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

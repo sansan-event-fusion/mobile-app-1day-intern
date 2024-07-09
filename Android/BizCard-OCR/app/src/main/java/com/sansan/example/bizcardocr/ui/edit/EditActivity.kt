@@ -24,7 +24,6 @@ class EditActivity : AppCompatActivity() {
         EditViewModel.EditViewModelFactory(bizCardId, bizCardOCRApplication.container)
     }
 
-    // TODO: Jetpack Composeを使ったUI実装に変更してみましょう！
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
