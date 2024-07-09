@@ -89,6 +89,7 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.3.3")
     implementation("androidx.camera:camera-lifecycle:1.3.3")
     implementation("androidx.camera:camera-view:1.3.3")
+    implementation("androidx.camera:camera-mlkit-vision:1.3.0-beta02")
 
     // OKHttp
     val okhttpVersion = "4.12.0"

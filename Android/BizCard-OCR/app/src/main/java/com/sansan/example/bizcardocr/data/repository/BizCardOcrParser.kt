@@ -13,13 +13,6 @@ class BizCardOcrParser(
     var tel: String? = null
     var departmentAndTitle: String? = null
 
-    /** Sansan社員の名刺向けの表現 */
-    // private val regexFindCompany = """株式会社""".toRegex()
-    // private val regexEmail = """E:\s?([\d.a-z\-]+@[\d.a-z]+)""".toRegex()
-    // private val regexTel = """T:\s?(\d{2,3}-\d{4}-\d{4})""".toRegex()
-    // private val regexFindName = """^\p{InCJKUnifiedIdeographs}{1,3}\s?\p{InCJKUnifiedIdeographs}{1,3}$""".toRegex()
-    // private val regexMatchDepartmentPosition = """(部|課|任|グループ|会計|部長)$""".toRegex()
-
     /**
      * 1day向けの正規表現
      */
@@ -55,7 +48,7 @@ class BizCardOcrParser(
         regexFindCompany.containsMatchIn(text)
 
     // 1行まるまる会社名が来る想定(名刺の種類に応じて適宜見直す)
-    private fun getCompanyName(text: String): String = text
+    private fun getCompanyName(text: String): String? = text
 
     private fun isEmail(text: String): Boolean =
         regexEmail.containsMatchIn(text)
@@ -78,5 +71,5 @@ class BizCardOcrParser(
     private fun getDepartmentAndTitle(text: String) = text
 
     // 1行まるまる氏名が来る想定(名刺の種類に応じて適宜見直す)
-    private fun getPersonName(text: String): String = text
+    private fun getPersonName(text: String): String? = text
 }

@@ -12,7 +12,6 @@ import com.sansan.example.bizcardocr.data.room.entites.BizCardEntity
 @TypeConverters(DateConverter::class)
 abstract class BizCardDatabase : RoomDatabase() {
     abstract fun bizCardDao(): BizCardDao
-
     companion object {
         @Volatile
         private var Instance: BizCardDatabase? = null

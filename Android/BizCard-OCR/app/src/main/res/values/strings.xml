@@ -16,9 +16,6 @@
     <string name="permission_camera_never_ask_again">カメラの使用を許可してください。</string>
     <string name="permission_camera_denied">カメラの使用が許可されていません。</string>
 
-    <!-- CameraActivity -->
-    <string name="camera_activity_detection_switch">自動検出</string>
-
     <!-- ResultActivity -->
     <string name="result_activity_title">名刺プレビュー</string>
     <string name="result_activity_ocr_error">読み取りに\n失敗しました</string>
@@ -29,10 +26,5 @@
 
     <!-- EditActivity -->
     <string name="edit_activity_title">名刺編集</string>
-
-    <!-- Appbar -->
-    <string name="appbar_search_hint">氏名・会社名・Email・TEL</string>
-    <string name="appbar_option_asc">昇順</string>
-    <string name="appbar_option_desc">降順</string>
-
+    <string name="camera_activity_switch">自動検出</string>
 </resources>

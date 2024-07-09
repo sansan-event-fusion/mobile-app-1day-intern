@@ -14,7 +14,7 @@ sealed interface AppBarState {
 
 enum class MainAppBarMenu {
     SORT_BY_DATE_ASC,
-    SORT_BY_DATE_DESC,
+    SORT_BY_DATE_DES,
 }
 
 sealed interface CardListItem {

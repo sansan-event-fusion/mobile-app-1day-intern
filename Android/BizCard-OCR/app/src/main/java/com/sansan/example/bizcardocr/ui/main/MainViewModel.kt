@@ -54,6 +54,7 @@ class MainViewModel(
         }
         .stateIn(viewModelScope, started = SharingStarted.Eagerly, initialValue = emptyList())
 
+    // ViewStateを生成
     val viewState = combine(
         appBarState,
         bizCardState
@@ -108,13 +109,12 @@ class MainViewModel(
      * @param item 選択されたオプションメニュー
      */
     fun applyOption(item: MainAppBarMenu) {
-        // TODO: ソート処理を実装してみましょう
         when (item) {
             MainAppBarMenu.SORT_BY_DATE_ASC -> {
                 appBarState.value = AppBarState.Default(false)
             }
 
-            MainAppBarMenu.SORT_BY_DATE_DESC -> {
+            MainAppBarMenu.SORT_BY_DATE_DES -> {
                 appBarState.value = AppBarState.Default(false)
             }
         }
@@ -132,8 +132,8 @@ class MainViewModel(
      * @param query 検索クエリ
      */
     fun queryChange(query: String) {
-        // TODO: 検索処理を実装してみましょう
         appBarState.value = AppBarState.Search(query)
+        // TODO : 検索処理を実装してUIに反映できるようにしてください
     }
 
     /**

@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BizCard-OCR"
+rootProject.name = "bizcard-ocr"
 include(":app")
